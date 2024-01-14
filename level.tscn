@@ -1,10 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://16lwhoix8gbd"]
+[gd_scene load_steps=18 format=3 uid="uid://16lwhoix8gbd"]
 
 [ext_resource type="Texture2D" uid="uid://cai0xipslnif4" path="res://assets/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="1_1wvq0"]
 [ext_resource type="Texture2D" uid="uid://dc13q83irhlbg" path="res://assets/Seasonal Tilesets/1 - Grassland/Extra_plants (16 x 16).png" id="2_d2ixk"]
 [ext_resource type="Texture2D" uid="uid://dnuin5uyrnwat" path="res://assets/Seasonal Tilesets/1 - Grassland/Grassland_entities (16 x 16).png" id="3_6csmx"]
 [ext_resource type="Texture2D" uid="uid://domdxcqu8ljo0" path="res://assets/Seasonal Tilesets/5 - Misc. universal tiles/House (112 x 96).png" id="4_nyh7k"]
 [ext_resource type="PackedScene" uid="uid://d3p6hg7mihug1" path="res://actors/player.tscn" id="5_nmjjm"]
+[ext_resource type="Texture2D" uid="uid://bals7j0tyfsmd" path="res://assets/Seasonal Tilesets/1 - Grassland/Background parts/5 - Sky_color.png" id="6_51jhi"]
+[ext_resource type="Texture2D" uid="uid://2qs6vxmqtccc" path="res://assets/Seasonal Tilesets/1 - Grassland/Background parts/4 - Cloud_cover_2.png" id="7_5mux7"]
+[ext_resource type="Texture2D" uid="uid://dm5ghr5bukmq5" path="res://assets/Seasonal Tilesets/1 - Grassland/Background parts/3 - Cloud_cover_1.png" id="8_e2gue"]
+[ext_resource type="Shader" path="res://shaders/movement_clouds.gdshader" id="8_q6aaf"]
+[ext_resource type="Texture2D" uid="uid://cvldxpf1buj6p" path="res://assets/Seasonal Tilesets/1 - Grassland/Background parts/2 - Hills.png" id="9_vscal"]
+[ext_resource type="Texture2D" uid="uid://db5y074svs75f" path="res://assets/Seasonal Tilesets/1 - Grassland/Background parts/1 - Foreground_scenery.png" id="10_f2wqq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_22gfo"]
 texture = ExtResource("1_1wvq0")
@@ -484,6 +490,9 @@ sources/1 = SubResource("TileSetAtlasSource_djjsk")
 sources/2 = SubResource("TileSetAtlasSource_pcnla")
 sources/3 = SubResource("TileSetAtlasSource_veje2")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ys343"]
+shader = ExtResource("8_q6aaf")
+
 [node name="Mundo" type="Node2D"]
 
 [node name="Level" type="TileMap" parent="."]
@@ -498,3 +507,56 @@ layer_2/tile_data = PackedInt32Array(458753, 589826, 1, 983070, 589826, 1, 13110
 
 [node name="Player" parent="." instance=ExtResource("5_nmjjm")]
 position = Vector2(49, 268)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer05" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.9, 1)
+motion_mirroring = Vector2(432, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer05"]
+position = Vector2(-18, -17)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("6_51jhi")
+centered = false
+
+[node name="ParallaxLayer04" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.3, 1)
+motion_mirroring = Vector2(432, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer04"]
+position = Vector2(-18, -17)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("7_5mux7")
+centered = false
+
+[node name="ParallaxLayer03" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.4, 1)
+motion_mirroring = Vector2(432, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer03"]
+material = SubResource("ShaderMaterial_ys343")
+position = Vector2(-18, -17)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("8_e2gue")
+centered = false
+
+[node name="ParallaxLayer02" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.7, 1)
+motion_mirroring = Vector2(432, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer02"]
+position = Vector2(-18, -17)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("9_vscal")
+centered = false
+
+[node name="ParallaxLayer01" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 1)
+motion_mirroring = Vector2(432, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer01"]
+position = Vector2(-18, -17)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("10_f2wqq")
+centered = false
