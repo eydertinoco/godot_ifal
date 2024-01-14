@@ -86,7 +86,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"running",
-"speed": 5.0
+"speed": 8.0
 }]
 
 [node name="Player" type="CharacterBody2D"]
@@ -94,17 +94,13 @@ collision_mask = 2
 script = ExtResource("1_44onv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -9)
 shape = SubResource("RectangleShape2D_or87r")
 one_way_collision_margin = 0.0
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -15)
-sprite_frames = SubResource("SpriteFrames_dcevu")
-animation = &"running"
-frame_progress = 0.872211
-
 [node name="Camera2D" type="Camera2D" parent="."]
+visible = false
 zoom = Vector2(2, 2)
 limit_left = 0
 limit_top = 0
@@ -113,3 +109,11 @@ limit_bottom = 300
 limit_smoothed = true
 position_smoothing_enabled = true
 editor_draw_limits = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -15)
+sprite_frames = SubResource("SpriteFrames_dcevu")
+animation = &"hurt"
+frame_progress = 0.894827
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
