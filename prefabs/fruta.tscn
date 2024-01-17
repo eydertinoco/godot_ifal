@@ -1,0 +1,72 @@
+[gd_scene load_steps=11 format=3 uid="uid://clfrf2t2aqyif"]
+
+[ext_resource type="Script" path="res://scripts/fruta.gd" id="1_68lkm"]
+[ext_resource type="Texture2D" uid="uid://br82bt6qysdua" path="res://assets/Mini FX, Items & UI/Food Items/Fruits (16 x 16).png" id="1_x7rpf"]
+[ext_resource type="Texture2D" uid="uid://bccough0y40ik" path="res://assets/Mini FX, Items & UI/Effects/Yellow_Sparkle (16 x 16).png" id="2_ov7bv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onmug"]
+atlas = ExtResource("2_ov7bv")
+region = Rect2(0, 0, 20, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sebcx"]
+atlas = ExtResource("2_ov7bv")
+region = Rect2(20, 0, 20, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fsyvx"]
+atlas = ExtResource("2_ov7bv")
+region = Rect2(40, 0, 20, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gxvlg"]
+atlas = ExtResource("2_ov7bv")
+region = Rect2(60, 0, 20, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ckqx7"]
+atlas = ExtResource("1_x7rpf")
+region = Rect2(0, 5, 16, 11)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o287q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_onmug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sebcx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fsyvx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gxvlg")
+}],
+"loop": true,
+"name": &"collect",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ckqx7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ue1o4"]
+radius = 6.0
+
+[node name="Area2D" type="Area2D"]
+collision_layer = 8
+script = ExtResource("1_68lkm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1, 0)
+sprite_frames = SubResource("SpriteFrames_o287q")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ue1o4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
