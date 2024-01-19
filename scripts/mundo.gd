@@ -7,8 +7,6 @@ extends Node2D
 func _ready():
 	player.follow_camera(camera)
 
-func colect_item():
-	quantidadeMaca += 1
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
