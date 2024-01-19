@@ -1,6 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://16lwhoix8gbd"]
+[gd_scene load_steps=21 format=3 uid="uid://16lwhoix8gbd"]
 
 [ext_resource type="Texture2D" uid="uid://cai0xipslnif4" path="res://assets/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="1_1wvq0"]
+[ext_resource type="Script" path="res://scripts/mundo.gd" id="1_s83rn"]
 [ext_resource type="Texture2D" uid="uid://dc13q83irhlbg" path="res://assets/Seasonal Tilesets/1 - Grassland/Extra_plants (16 x 16).png" id="2_d2ixk"]
 [ext_resource type="Texture2D" uid="uid://dnuin5uyrnwat" path="res://assets/Seasonal Tilesets/1 - Grassland/Grassland_entities (16 x 16).png" id="3_6csmx"]
 [ext_resource type="Texture2D" uid="uid://domdxcqu8ljo0" path="res://assets/Seasonal Tilesets/5 - Misc. universal tiles/House (112 x 96).png" id="4_nyh7k"]
@@ -12,6 +13,7 @@
 [ext_resource type="Shader" path="res://shaders/movement_clouds.gdshader" id="8_q6aaf"]
 [ext_resource type="Texture2D" uid="uid://cvldxpf1buj6p" path="res://assets/Seasonal Tilesets/1 - Grassland/Background parts/2 - Hills.png" id="9_vscal"]
 [ext_resource type="Texture2D" uid="uid://db5y074svs75f" path="res://assets/Seasonal Tilesets/1 - Grassland/Background parts/1 - Foreground_scenery.png" id="10_f2wqq"]
+[ext_resource type="PackedScene" uid="uid://di0grlo77hfnf" path="res://actors/robo_pumpkin.tscn" id="13_lfb3l"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_22gfo"]
 texture = ExtResource("1_1wvq0")
@@ -496,6 +498,7 @@ shader = ExtResource("8_q6aaf")
 shader_parameter/move_speed = 0.5
 
 [node name="Mundo" type="Node2D"]
+script = ExtResource("1_s83rn")
 
 [node name="Level" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_wxgul")
@@ -523,6 +526,11 @@ position = Vector2(584, 33)
 
 [node name="Area2D5" parent="Frutas" instance=ExtResource("5_gs7qw")]
 position = Vector2(96, 258)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="CharacterBody2D" parent="Enemies" instance=ExtResource("13_lfb3l")]
+position = Vector2(239, 232)
 
 [node name="Player" parent="." instance=ExtResource("5_nmjjm")]
 position = Vector2(49, 268)
@@ -574,3 +582,13 @@ position = Vector2(-18, -17)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("10_f2wqq")
 centered = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+limit_left = 0
+limit_top = 0
+limit_right = 640
+limit_bottom = 300
+limit_smoothed = true
+position_smoothing_enabled = true
+editor_draw_limits = true

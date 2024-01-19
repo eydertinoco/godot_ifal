@@ -1,6 +1,6 @@
 extends Area2D
 
-var quantidadeColetada = 0
+@onready var animation := $AnimatedSprite2D as AnimatedSprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -11,9 +11,7 @@ func _ready():
 func _process(delta):
 	pass
 
-
 func _on_body_entered(body: Node2D) -> void:
-	$AnimatedSprite2D.play("collect")
-	quantidadeColetada += 1
-	print(quantidadeColetada)
+	animation.play("collect")
+	Mundo.colect_item()
 	queue_free()

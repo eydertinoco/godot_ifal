@@ -8,7 +8,8 @@ var quantidadeMaca
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var is_jumping := false
 
-@onready var animation := $AnimatedSprite2D
+@onready var animation := $AnimatedSprite2D as AnimatedSprite2D
+@onready var remote_transform   := $RemoteTransform2D as RemoteTransform2D
 
 
 func _physics_process(delta):
@@ -41,3 +42,13 @@ func _physics_process(delta):
 		animation.play("idle")
 
 	move_and_slide()
+
+
+func _on_area_2d_body_entered(body):
+	if body.is_in_group("enemies"):
+		queue_free()
+		
+
+func follow_camera(camera):
+	var camera_path = camera.get_path()
+	remote_transform.remote_path = camera_path

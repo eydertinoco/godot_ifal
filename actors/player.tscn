@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d3p6hg7mihug1"]
+[gd_scene load_steps=17 format=3 uid="uid://d3p6hg7mihug1"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_44onv"]
 [ext_resource type="Texture2D" uid="uid://ciwuok3u7fo0x" path="res://assets/Sprite Pack 2/2 - Mr. Mochi/Hurt (32 x 32).png" id="2_6km1f"]
@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bx81ynl50rrt8" path="res://assets/Sprite Pack 2/2 - Mr. Mochi/Running (32 x 32).png" id="5_y6rpf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_or87r"]
-size = Vector2(20, 18)
+size = Vector2(14, 15)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ddl5d"]
 atlas = ExtResource("2_6km1f")
@@ -89,31 +89,34 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n6o4m"]
+size = Vector2(18, 12)
+
 [node name="Player" type="CharacterBody2D"]
-collision_mask = 2
+collision_mask = 22
 script = ExtResource("1_44onv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, -9)
+position = Vector2(0, -7.5)
 shape = SubResource("RectangleShape2D_or87r")
 one_way_collision_margin = 0.0
-
-[node name="Camera2D" type="Camera2D" parent="."]
-visible = false
-zoom = Vector2(2, 2)
-limit_left = 0
-limit_top = 0
-limit_right = 640
-limit_bottom = 300
-limit_smoothed = true
-position_smoothing_enabled = true
-editor_draw_limits = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_dcevu")
-animation = &"hurt"
-frame_progress = 0.21756
+animation = &"idle"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_n6o4m")
+debug_color = Color(0.996078, 0, 0.176471, 0.419608)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
