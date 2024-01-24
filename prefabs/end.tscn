@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://dpem1vbvsv0ft"]
+
+[ext_resource type="Script" path="res://scripts/End.gd" id="1_ybe2n"]
+[ext_resource type="Texture2D" uid="uid://domdxcqu8ljo0" path="res://assets/Seasonal Tilesets/5 - Misc. universal tiles/House (112 x 96).png" id="2_fy8w8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0jb5j"]
+atlas = ExtResource("2_fy8w8")
+region = Rect2(21, 64, 21, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2kyj1"]
+atlas = ExtResource("2_fy8w8")
+region = Rect2(144, 64, 24, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_70o82"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0jb5j")
+}],
+"loop": false,
+"name": &"closedoor",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2kyj1")
+}],
+"loop": false,
+"name": &"opendoor",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1svy7"]
+size = Vector2(22, 32)
+
+[node name="End" type="Area2D"]
+collision_layer = 2
+script = ExtResource("1_ybe2n")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_70o82")
+animation = &"closedoor"
+autoplay = "closedoor"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_1svy7")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

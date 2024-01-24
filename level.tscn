@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b670ltved2e5i"]
+[gd_scene load_steps=23 format=3 uid="uid://b670ltved2e5i"]
 
 [ext_resource type="Texture2D" uid="uid://cai0xipslnif4" path="res://assets/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="1_1wvq0"]
 [ext_resource type="Script" path="res://scripts/mundo.gd" id="1_s83rn"]
@@ -14,6 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://cvldxpf1buj6p" path="res://assets/Seasonal Tilesets/1 - Grassland/Background parts/2 - Hills.png" id="9_vscal"]
 [ext_resource type="Texture2D" uid="uid://db5y074svs75f" path="res://assets/Seasonal Tilesets/1 - Grassland/Background parts/1 - Foreground_scenery.png" id="10_f2wqq"]
 [ext_resource type="PackedScene" uid="uid://di0grlo77hfnf" path="res://actors/robo_pumpkin.tscn" id="13_lfb3l"]
+[ext_resource type="Script" path="res://scripts/hud_manager.gd" id="15_jlloi"]
+[ext_resource type="PackedScene" uid="uid://dpem1vbvsv0ft" path="res://prefabs/end.tscn" id="16_3utr6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_22gfo"]
 texture = ExtResource("1_1wvq0")
@@ -524,16 +526,13 @@ position = Vector2(488, 239)
 [node name="Area2D4" parent="Frutas" instance=ExtResource("5_gs7qw")]
 position = Vector2(584, 33)
 
-[node name="Area2D5" parent="Frutas" instance=ExtResource("5_gs7qw")]
-position = Vector2(96, 258)
-
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="CharacterBody2D" parent="Enemies" instance=ExtResource("13_lfb3l")]
 position = Vector2(239, 232)
 
 [node name="Player" parent="." instance=ExtResource("5_nmjjm")]
-position = Vector2(49, 268)
+position = Vector2(80, 271)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -592,3 +591,47 @@ limit_bottom = 300
 limit_smoothed = true
 position_smoothing_enabled = true
 editor_draw_limits = true
+
+[node name="Hud" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="Hud"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+script = ExtResource("15_jlloi")
+
+[node name="MarginContainer" type="MarginContainer" parent="Hud/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FrutaContainer" type="HBoxContainer" parent="Hud/Control/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="FrutaLabel" type="Label" parent="Hud/Control/MarginContainer/FrutaContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 24
+text = "Fruta:"
+vertical_alignment = 1
+
+[node name="FrutaCounter" type="Label" parent="Hud/Control/MarginContainer/FrutaContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 24
+text = "0"
+vertical_alignment = 1
+
+[node name="End" parent="." instance=ExtResource("16_3utr6")]
+position = Vector2(48, 272)

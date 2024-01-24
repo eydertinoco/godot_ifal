@@ -6,9 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://bt5hm3i5ilowb" path="res://assets/Sprite Pack 2/2 - Mr. Mochi/Jumping (32 x 32).png" id="4_kywqp"]
 [ext_resource type="Texture2D" uid="uid://bx81ynl50rrt8" path="res://assets/Sprite Pack 2/2 - Mr. Mochi/Running (32 x 32).png" id="5_y6rpf"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_or87r"]
-size = Vector2(14, 15)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_ddl5d"]
 atlas = ExtResource("2_6km1f")
 region = Rect2(0, 0, 32, 32)
@@ -89,17 +86,15 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_or87r"]
+size = Vector2(12, 15)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n6o4m"]
-size = Vector2(18, 12)
+size = Vector2(16, 12)
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 22
 script = ExtResource("1_44onv")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -7.5)
-shape = SubResource("RectangleShape2D_or87r")
-one_way_collision_margin = 0.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -15)
@@ -108,12 +103,17 @@ animation = &"idle"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7.5)
+shape = SubResource("RectangleShape2D_or87r")
+one_way_collision_margin = 0.0
+
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -8)
+position = Vector2(0, -9)
 shape = SubResource("RectangleShape2D_n6o4m")
 debug_color = Color(0.996078, 0, 0.176471, 0.419608)
 
