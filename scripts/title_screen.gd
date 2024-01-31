@@ -6,6 +6,7 @@ func _ready():
 	pass
 
 func _on_start_button_pressed():
+	Globals.frutas = 0
 	get_tree().change_scene_to_file("res://level.tscn")
 
 func _on_quit_button_pressed():
